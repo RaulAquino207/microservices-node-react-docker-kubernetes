@@ -3,12 +3,12 @@ import { Request, Response } from "express";
 import { randomBytes } from 'crypto';
 
 const app = express();
-const port = 3000;
+const port = 3001;
 
 /**
  * As it is a simple example, no database will be used.
  */
-let posts : any = {};
+let commentsByPostId : any = {};
 
 app.use(express.json());
 
@@ -16,12 +16,13 @@ app.get('/', (req : Request, res : Response) => {
     return res.json({ message: `🚀 API for posts services` });
 });
 
-app.post('/posts', (req : Request, res : Response) => {
+app.post('/:id/comments', (req : Request, res : Response) => {
     const id = randomBytes(4).toString('hex');
 
     const { content } = req.body;
+    const { postId } = req.params;
 
-    posts[`${id}`] = {
+    commentsByPostId[`${id}`] = {
         id,
         content
     };
@@ -32,8 +33,8 @@ app.post('/posts', (req : Request, res : Response) => {
     })
 });
 
-app.get('/posts', (req : Request, res : Response) => {
-    return res.json(posts);
+app.get('/:id/comments', (req : Request, res : Response) => {
+    return res.json(commentsByPostId);
 });
 
 app.listen(port, () => {
