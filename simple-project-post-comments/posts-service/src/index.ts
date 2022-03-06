@@ -8,7 +8,9 @@ const port = 3000;
 /**
  * As it is a simple example, no database will be used.
  */
-const posts = {};
+let posts : any = {};
+
+app.use(express.json());
 
 app.get('/', (req : Request, res : Response) => {
     return res.json({ message: `🚀 API for posts services` });
@@ -19,14 +21,19 @@ app.post('/posts', (req : Request, res : Response) => {
 
     const { context } = req.body;
 
-    Object.assign(posts, {
+    posts[`${id}`] = {
+        id,
+        context
+    };
+
+    return res.json({
         id,
         context
     })
 });
 
 app.get('/posts', (req : Request, res : Response) => {
-    return res.json({ message: `🚀 API for posts services` });
+    return res.json(posts);
 });
 
 app.listen(port, () => {
