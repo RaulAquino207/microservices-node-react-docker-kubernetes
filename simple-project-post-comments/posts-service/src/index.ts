@@ -13,7 +13,7 @@ let posts : any = {};
 app.use(express.json());
 
 app.get('/', (req : Request, res : Response) => {
-    return res.json({ message: `🚀 API for posts services` });
+    return res.json({ message: `🚀 API for posts service` });
 });
 
 app.post('/posts', (req : Request, res : Response) => {

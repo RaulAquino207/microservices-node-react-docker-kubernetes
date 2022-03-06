@@ -13,28 +13,28 @@ let commentsByPostId : any = {};
 app.use(express.json());
 
 app.get('/', (req : Request, res : Response) => {
-    return res.json({ message: `🚀 API for posts services` });
+    return res.json({ message: `🚀 API for comments service` });
 });
 
-app.post('/:id/comments', (req : Request, res : Response) => {
+app.post('/:postId/comments', (req : Request, res : Response) => {
     const id = randomBytes(4).toString('hex');
 
     const { content } = req.body;
     const { postId } = req.params;
 
-    commentsByPostId[`${id}`] = {
+    const comments = commentsByPostId[postId] || [];
+    comments.push({ 
         id,
         content
-    };
+    });
 
-    return res.json({
-        id,
-        content
-    })
+    commentsByPostId[postId] = comments;
 });
 
 app.get('/:id/comments', (req : Request, res : Response) => {
-    return res.json(commentsByPostId);
+
+    const { postId } = req.params;
+    return res.json(commentsByPostId[postId] || []);
 });
 
 app.listen(port, () => {
