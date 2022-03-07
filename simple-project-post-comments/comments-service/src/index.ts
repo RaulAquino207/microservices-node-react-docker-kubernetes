@@ -1,6 +1,7 @@
 import express from "express";
 import { Request, Response } from "express";
 import { randomBytes } from 'crypto';
+import cors from 'cors';
 
 const app = express();
 const port = 3001;
@@ -11,6 +12,7 @@ const port = 3001;
 let commentsByPostId : any = {};
 
 app.use(express.json());
+app.use(cors());
 
 app.get('/', (req : Request, res : Response) => {
     return res.json({ message: `🚀 API for comments service` });
@@ -29,9 +31,14 @@ app.post('/:postId/comments', (req : Request, res : Response) => {
     });
 
     commentsByPostId[postId] = comments;
+
+    return res.json({ 
+        id,
+        content
+    });
 });
 
-app.get('/:id/comments', (req : Request, res : Response) => {
+app.get('/:postId/comments', (req : Request, res : Response) => {
 
     const { postId } = req.params;
     return res.json(commentsByPostId[postId] || []);

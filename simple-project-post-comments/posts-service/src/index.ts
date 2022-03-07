@@ -1,6 +1,7 @@
 import express from "express";
 import { Request, Response } from "express";
 import { randomBytes } from 'crypto';
+import cors from 'cors';
 
 const app = express();
 const port = 3000;
@@ -11,6 +12,7 @@ const port = 3000;
 let posts : any = {};
 
 app.use(express.json());
+app.use(cors());
 
 app.get('/', (req : Request, res : Response) => {
     return res.json({ message: `🚀 API for posts service` });
