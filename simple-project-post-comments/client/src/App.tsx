@@ -1,6 +1,7 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import PostCreate from './components/post-create';
 
 function App() {
   return (
@@ -20,7 +21,10 @@ function App() {
     //     </a>
     //   </header>
     // </div>
-    <div>APP</div>
+    <div className='container'>
+      <h1>Create Post</h1>
+      <PostCreate/>
+    </div>
   );
 }
 
