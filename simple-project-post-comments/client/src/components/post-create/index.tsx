@@ -19,7 +19,7 @@ const PostCreate: React.FC = () => {
       <div>
           <form onSubmit={onSubmit}>
               <div className='form-group'>
-                  <label>Title</label>
+                  <label>What are you thinking?</label>
                   <input value={content} onChange={e => setContent(e.target.value)} className='form-control'/>
               </div>
               <button className='btn btn-primary'>Submit</button>

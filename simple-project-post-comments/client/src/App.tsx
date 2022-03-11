@@ -2,6 +2,7 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import PostCreate from './components/post-create';
+import PostList from './components/post-list';
 
 function App() {
   return (
@@ -24,6 +25,9 @@ function App() {
     <div className='container'>
       <h1>Create Post</h1>
       <PostCreate/>
+      <hr/>
+      <h1>Posts</h1>
+      <PostList/>
     </div>
   );
 }
