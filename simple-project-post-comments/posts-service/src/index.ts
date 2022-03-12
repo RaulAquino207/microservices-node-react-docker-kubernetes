@@ -2,9 +2,10 @@ import express from "express";
 import { Request, Response } from "express";
 import { randomBytes } from 'crypto';
 import cors from 'cors';
+import axios from 'axios';
 
 const app = express();
-const port = 3000;
+const port = 4001;
 
 /**
  * As it is a simple example, no database will be used.
@@ -27,6 +28,14 @@ app.post('/posts', (req : Request, res : Response) => {
         id,
         content
     };
+
+    axios.post('http://localhost:3000/events', {
+        type : 'PostCreated',
+        data : {
+            id,
+            content
+        }
+    });
 
     return res.json({
         id,

@@ -4,7 +4,7 @@ import { randomBytes } from 'crypto';
 import cors from 'cors';
 
 const app = express();
-const port = 3001;
+const port = 4000;
 
 /**
  * As it is a simple example, no database will be used.
